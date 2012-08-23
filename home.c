@@ -34,7 +34,18 @@ void home() {
 /// find X MIN endstop
 void home_x_negative() {
 	#if defined X_MIN_PIN
-		TARGET t = startpoint;
+
+        TARGET t;
+
+        #ifdef Z_SEARCH_POSITION
+            t = startpoint;
+            t.F = MAXIMUM_FEEDRATE_Z;
+            t.Z = Z_SEARCH_POSITION;
+            enqueue(&t);
+            queue_wait();
+        #endif
+
+		t = startpoint;
 
 		t.X = -1000000;
 		#ifdef SLOW_HOMING
@@ -70,7 +81,18 @@ void home_x_positive() {
 		#warning X_MAX_PIN defined, but not X_MAX. home_x_positive() disabled.
 	#endif
 	#if defined X_MAX_PIN && defined X_MAX
-		TARGET t = startpoint;
+
+        TARGET t;
+
+        #ifdef Z_SEARCH_POSITION
+            t = startpoint;
+            t.F = MAXIMUM_FEEDRATE_Z;
+            t.Z = Z_SEARCH_POSITION;
+            enqueue(&t);
+            queue_wait();
+        #endif
+
+		t = startpoint;
 
 		t.X = +1000000;
 		#ifdef SLOW_HOMING
@@ -104,7 +126,18 @@ void home_x_positive() {
 /// fund Y MIN endstop
 void home_y_negative() {
 	#if defined Y_MIN_PIN
-		TARGET t = startpoint;
+
+        TARGET t;
+
+        #ifdef Z_SEARCH_POSITION
+            t = startpoint;
+            t.F = MAXIMUM_FEEDRATE_Z;
+            t.Z = Z_SEARCH_POSITION;
+            enqueue(&t);
+            queue_wait();
+        #endif
+
+		t = startpoint;
 
 		t.Y = -1000000;
 		#ifdef SLOW_HOMING
@@ -140,7 +173,18 @@ void home_y_positive() {
 		#warning Y_MAX_PIN defined, but not Y_MAX. home_y_positive() disabled.
 	#endif
 	#if defined Y_MAX_PIN && defined Y_MAX
-		TARGET t = startpoint;
+
+        TARGET t;
+
+        #ifdef Z_SEARCH_POSITION
+            t = startpoint;
+            t.F = MAXIMUM_FEEDRATE_Z;
+            t.Z = Z_SEARCH_POSITION;
+            enqueue(&t);
+            queue_wait();
+        #endif
+
+		t = startpoint;
 
 		t.Y = +1000000;
 		#ifdef SLOW_HOMING
@@ -174,6 +218,7 @@ void home_y_positive() {
 /// find Z MIN endstop
 void home_z_negative() {
 	#if defined Z_MIN_PIN
+
 		TARGET t = startpoint;
 
 		t.Z = -1000000;

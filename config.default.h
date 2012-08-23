@@ -94,6 +94,10 @@
 */
 // #define	SLOW_HOMING
 
+
+/// If this is defined Z axis will be moved to value while X or Y is homing. Use this to move hotend up so it wont collide.
+//#define Z_SEARCH_POSITION       10
+
 /// this is how many steps to suck back the filament by when we stop. set to zero to disable
 #define	E_STARTSTOP_STEPS			20
 
@@ -219,6 +223,9 @@
 //#define	Z_INVERT_MIN
 //#define	Z_INVERT_MAX
 //#define	Z_INVERT_ENABLE
+
+/// if defined z motor will newer shutdown
+//#define Z_ALWAYS_ENABLED
 
 #define	E_STEP_PIN						DIO7
 #define	E_DIR_PIN							DIO8

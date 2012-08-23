@@ -19,3 +19,5 @@ config.h
 ThermistorTable.h
 sim
 doc
+Teacup.cbp
+Teacup.depend

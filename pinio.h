@@ -188,10 +188,18 @@ Stepper Enable Pins
 #ifdef	Z_ENABLE_PIN
 	#ifdef	Z_INVERT_ENABLE
 		#define	z_enable()				do { WRITE(Z_ENABLE_PIN, 0); } while (0)
-		#define	z_disable()				do { WRITE(Z_ENABLE_PIN, 1); } while (0)
+		#ifdef Z_ALWAYS_ENABLED
+            #define	z_disable()			do { } while (0)
+        #else
+            #define	z_disable()			do { WRITE(Z_ENABLE_PIN, 1); } while (0)
+        #endif
 	#else
 		#define	z_enable()				do { WRITE(Z_ENABLE_PIN, 1); } while (0)
-		#define	z_disable()				do { WRITE(Z_ENABLE_PIN, 0); } while (0)
+		#ifdef Z_ALWAYS_ENABLED
+            #define	z_disable()			do { } while (0)
+        #else
+            #define	z_disable()			do { WRITE(Z_ENABLE_PIN, 1); } while (0)
+        #endif
 	#endif
 #else
 	#define	z_enable()					do { } while (0)
